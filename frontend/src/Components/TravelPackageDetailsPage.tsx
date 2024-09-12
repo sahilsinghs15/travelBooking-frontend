@@ -1,7 +1,10 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
-import Footer from "./Footer";
+import { Suspense, lazy } from 'react';
+
+// Lazy load the Footer component
+const Footer = lazy(() => import("./Footer"));
 
 export default function TravelPackageDetailsPage() {
   const { package_id } = useParams();
@@ -96,7 +99,9 @@ export default function TravelPackageDetailsPage() {
         </div>
       </main>
 
-      <Footer/>
+      <Suspense fallback={<div className="text-center">Loading Footer...</div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { isEmail, isValidPassword } from '../Helpers/regexMatcher.ts';
-import { createAccount } from '../Redux/Slices/authSlice.reducer.ts';
-import { UserData } from "../Redux/Slices/authSlice.reducer.ts";
+import { isEmail, isValidPassword } from '../Helpers/regexMatcher';
+import { createAccount } from '../Redux/Slices/authSlice.reducer';
+import { UserData } from "../Redux/Slices/authSlice.reducer";
 
 function Signup() {
     const dispatch = useDispatch();

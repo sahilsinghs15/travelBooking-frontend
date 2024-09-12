@@ -1,7 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
-import authSliceReducer from "./Slices/authSlice.reducer.ts";
-import travelPackageSliceReducer from "./Slices/travelPackageSlice.reducer.ts";
-import travelBookingSliceReducer from "./Slices/travelBookingSlice.reducer.ts";
+import authSliceReducer from "./Slices/authSlice.reducer";
+import travelPackageSliceReducer from "./Slices/travelPackageSlice.reducer";
+import travelBookingSliceReducer from "./Slices/travelBookingSlice.reducer";
 
 
 const store = configureStore({

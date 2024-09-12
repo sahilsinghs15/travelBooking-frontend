@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
-import { login, LoginType } from '../Redux/Slices/authSlice.reducer.ts';
-import { useAppDispatch } from '../Helpers/Hooks.ts';
+import { login, LoginType } from '../Redux/Slices/authSlice.reducer';
+import { useAppDispatch } from '../Helpers/Hooks';
 
 function Login() {
     const dispatch = useAppDispatch();

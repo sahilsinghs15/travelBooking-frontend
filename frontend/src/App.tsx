@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import Homepage from './Pages/Homepage.tsx';
-import Signup from "./Pages/Signup.tsx";
-import Login from "./Pages/Login.tsx";
-import Denied from "./Pages/Denied.tsx";
-import NotFound from "./Pages/NotFound.tsx";
-import Aboutus from "./Pages/Aboutus.tsx";
-import TravelPackagesPage from "./Components/TravelPackagesPage.tsx";
-import TravelPackageDetailsPage from "./Components/TravelPackageDetailsPage.tsx";
-import SearchResultsPage from "./Components/SearchResultsPage.tsx";
-import ProfilePage from "./Components/ProfilePage.tsx";
-import TravelBookingPage from "./Components/TravelBookingPage.tsx";
+import Homepage from './Pages/Homepage';
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import Denied from "./Pages/Denied";
+import NotFound from "./Pages/NotFound";
+import Aboutus from "./Pages/Aboutus";
+import TravelPackagesPage from "./Components/TravelPackagesPage";
+import TravelPackageDetailsPage from "./Components/TravelPackageDetailsPage";
+import SearchResultsPage from "./Components/SearchResultsPage";
+import ProfilePage from "./Components/ProfilePage";
+import TravelBookingPage from "./Components/TravelBookingPage";
 
 
 function App() {

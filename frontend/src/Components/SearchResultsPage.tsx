@@ -5,7 +5,10 @@ import { searchTravelPackages } from "../Redux/Slices/travelPackageSlice.reducer
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../Helpers/Hooks";
-import Footer from "./Footer";
+import { Suspense, lazy } from 'react';
+
+// Lazy load the Footer component
+const Footer = lazy(() => import("./Footer"));
 
 export default function SearchResultsPage() {
   const dispatch = useAppDispatch(); 
@@ -60,7 +63,9 @@ export default function SearchResultsPage() {
         </section>
       </main>
 
-      <Footer/>
+      <Suspense fallback={<div className="text-center">Loading Footer...</div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
