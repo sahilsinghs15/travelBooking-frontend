@@ -25,7 +25,7 @@ export interface AuthState {
 // Get initial state from local storage
 const storedData = localStorage.getItem('data');
 const initialState: AuthState = {
-  isLoggedIn: localStorage.getItem('isLoggedIn') === 'true', // Parse as boolean
+  isLoggedIn: localStorage.getItem('isLoggedIn') === 'true', 
   data: storedData && storedData !== "undefined" ? JSON.parse(storedData) : null,
 };
 
@@ -69,11 +69,11 @@ export const logout = createAsyncThunk("auth/logout",async (_, { rejectWithValue
 );
 
 // Update profile thunk
-export const updateProfile = createAsyncThunk("auth/updateProfile",async ([userId, profileData]: [string, Partial<UserData>], { rejectWithValue }) => {
+export const updateProfile = createAsyncThunk("auth/updateProfile",async ([id, profileData]: [string, Partial<UserData>], { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.put(`/user/update/${userId}`, profileData);
+      const response = await axiosInstance.put(`/user/update/${id}`, profileData);
       toast.success(response.data?.message || "Profile updated successfully");
-      return response.data;
+      return response.data?.user;
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Failed to update profile");
       return rejectWithValue(error?.response?.data);
@@ -85,7 +85,7 @@ export const updateProfile = createAsyncThunk("auth/updateProfile",async ([userI
 export const getUserData = createAsyncThunk("auth/getUserData",async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get("/user/me");
-      return response.data;
+      return response.data?.user;
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Failed to fetch user data");
       return rejectWithValue(error?.response?.data);
@@ -116,10 +116,20 @@ const authSlice = createSlice({
       // Fetch user data fulfilled
       .addCase(getUserData.fulfilled, (state, action: PayloadAction<any>) => {
         if (!action.payload?.user) return;
-        localStorage.setItem("data", JSON.stringify(action.payload?.user));
+        localStorage.setItem("data", JSON.stringify(action.payload));
         localStorage.setItem("isLoggedIn", 'true');
         state.isLoggedIn = true;
-        state.data = action.payload?.user;
+        state.data = action.payload;
+      })
+
+      //Update user profile data fullfilled
+
+      .addCase(updateProfile.fulfilled , (state , action : PayloadAction<any>)=>{
+        if(!action.payload?.user) return;
+        localStorage.setItem("data", JSON.stringify(action.payload));
+        localStorage.setItem("isLoggedIn", 'true');
+        state.isLoggedIn = true;
+        state.data = action.payload;
       })
       
   }

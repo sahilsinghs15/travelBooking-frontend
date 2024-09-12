@@ -1,10 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast} from 'react-hot-toast';
-import axiosInstance from '../../Helpers/axiosInstance.ts';
-import axios from 'axios';
-
-// Define the initial state type for packages
-
+import axiosInstance from '../../Helpers/axiosInstance';
 
 export interface TravelPackage {
   package_id: number;
@@ -67,13 +63,11 @@ export const fetchTravelPackages = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
 
-      const response: any = await axios.get('http://localhost:5500/api/v1/travelPackage/');
-      
-      console.log("API Response", response?.data);
+      const response: any = await axiosInstance.get('/travelPackage/');
       
       toast.success("Travel Packages Loaded Successfully");
 
-      return await response?.data.packages; // Return just the packages array
+      return await response?.data.packages; 
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Failed to Fetch Travel Packages');
       return rejectWithValue('Failed to fetch travel packages');
@@ -98,7 +92,8 @@ export const searchTravelPackages: any = createAsyncThunk(
         maxDuration: filters.maxDuration, 
       };
 
-      const response: any = await axios.get('http://localhost:5500/api/v1/travelPackage/search',{params});
+      const response: any = await axiosInstance.get('/travelPackage/search',{params});
+      toast.success("Packages searched successfully");
       return await response?.data.packages;
     } catch (error: any) {
       toast.error(error?.response?.data?.message || 'Failed To Search Travel Packages');
@@ -117,35 +112,41 @@ const travelPackageSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Handle fetchTravelPackages
+    
     builder.addCase(fetchTravelPackages.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
+
     builder.addCase(fetchTravelPackages.fulfilled, (state, action) => {
       state.loading = false;
-      state.error = null; // Clear any previous errors
+      state.error = null; 
       state.packages = action.payload;
     });
+
     builder.addCase(fetchTravelPackages.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
     });
-    // Handle searchTravelPackages
+   
     builder.addCase(searchTravelPackages.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
+    
     builder.addCase(searchTravelPackages.fulfilled, (state, action) => {
       state.loading = false;
-      state.error = null; // Clear any previous errors
+      state.error = null; 
       state.packages = action.payload;
     });
+
     builder.addCase(searchTravelPackages.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
     });
+
   },
+
 });
 
 export const { setFilters } = travelPackageSlice.actions;
