@@ -22,10 +22,20 @@ To set up the project locally, follow these steps:
 
   ```
     cd frontend
-    Install dependencies:
+  ```
+## Install dependencies:
+
+## Dependencies -->
+  ```
+    npm install @reduxjs/toolkit @tailwindcss/line-clamp axios chart.js daisyui lucide-react react-chartjs-2 react-hot-toast react-icons react-redux react-router-dom
 
   ```
-    npm install
+## Dev Dependencies -->
+
+   ```
+      npm install -D ts-jest tailwindcss postcss jest-environment-jsdom jest eslint-plugin-simple-import-sort autoprefixer @types/react-dom @types/react @types/jest
+      @testing-library/user-event @testing-library/react @testing-library/jest-dom
+   ```
   Start the development server:
 
   ```
@@ -39,7 +49,7 @@ To set up the project locally, follow these steps:
   ```
     npm run build
   
-  ### API Integration
+  ## API Integration
   This project uses mock data for testing purposes, but it is structured to integrate with a Node.js/Express backend for dynamic data.
 
   ### Scripts
