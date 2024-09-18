@@ -23,6 +23,13 @@ To set up the project locally, follow these steps:
   ```
     cd frontend
   ```
+
+# If You are forking the repository then->
+```
+   npm install
+
+```
+
 ## Install dependencies:
 
 ## Dependencies -->
